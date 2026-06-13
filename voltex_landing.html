@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VoltEx Electricals</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="voltex.css" />
+</head>
+
+<body>
+
+  <nav>
+    <a class="nav-logo" onclick="showPage('home')">Volt<span>Ex</span> Electricals</a>
+    <ul class="nav-links">
+      <li><a onclick="showPage('home')">Home</a></li>
+      <li><a onclick="goSection('about')">About</a></li>
+      <li><a onclick="goSection('products')">Products</a></li>
+      <li><a onclick="goSection('contact')">Contact</a></li>
+      <li><a onclick="openDashboard()" class="nav-dashboard">&#9881; Dashboard</a></li>
+    </ul>
+  </nav>
+
+  <!-- ============================================================
+     LOGIN PAGE
+============================================================ -->
+  <div id="page-login" class="page">
+    <div class="login-box">
+      <div class="login-logo">Volt<span>Ex</span></div>
+      <div class="login-sub">&#128274; Dashboard Login &mdash; Authorised Personnel Only</div>
+      <div class="login-error" id="login-error">&#10060; Incorrect email or password. Please try again.</div>
+      <div class="field">
+        <label>Email Address</label>
+        <input type="email" id="login-email" placeholder="admin@voltexelectricals.in" autocomplete="username" />
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <div class="pw-wrap">
+          <input type="password" id="login-password" placeholder="Enter your password" autocomplete="current-password"
+            onkeydown="if(event.key==='Enter')doLogin()" />
+          <span class="pw-toggle" onclick="togglePw()" id="pw-eye">&#128065;</span>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="doLogin()"
+        style="width:100%;text-align:center;padding:.9rem;margin-top:.5rem">Login to Dashboard &rarr;</button>
+      <div class="login-hint">Default credentials &mdash; Email: <code>admin@voltex.in</code> &nbsp; Password:
+        <code>voltex@2024</code></div>
+      <a class="login-back" onclick="showPage('home')">&larr; Back to Website</a>
+    </div>
+  </div>
+
+  <!-- ============================================================
+     HOME PAGE
+============================================================ -->
+  <div id="page-home" class="page active">
+
+    <section id="home-section">
+      <div class="hero-content">
+        <div class="hero-eyebrow">Industrial Electrical Spare Parts</div>
+        <h1 class="hero-h1">Power Your<br />Systems with<br /><em>Precision Parts</em></h1>
+        <p class="hero-sub">From circuit breakers to control panels &mdash; we stock over 10,000 genuine electrical
+          components for industrial, commercial, and residential applications.</p>
+        <a class="btn-primary" onclick="goSection('products')">Browse Products</a>
+        <a class="btn-ghost" onclick="goSection('contact')">Get a Quote</a>
+        <div class="hero-stats">
+          <div>
+            <div class="stat-num">10K+</div>
+            <div class="stat-label">Parts in Stock</div>
+          </div>
+          <div>
+            <div class="stat-num">25+</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div>
+            <div class="stat-num">500+</div>
+            <div class="stat-label">Brands Covered</div>
+          </div>
+          <div>
+            <div class="stat-num">98%</div>
+            <div class="stat-label">Same-Day Dispatch</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="about-grid">
+        <div class="about-visual">
+          <svg viewBox="0 0 400 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="0" y1="80" x2="400" y2="80" stroke="#2E3A50" stroke-width="1" />
+            <line x1="0" y1="160" x2="400" y2="160" stroke="#2E3A50" stroke-width="1" />
+            <line x1="0" y1="240" x2="400" y2="240" stroke="#2E3A50" stroke-width="1" />
+            <line x1="80" y1="0" x2="80" y2="320" stroke="#2E3A50" stroke-width="1" />
+            <line x1="160" y1="0" x2="160" y2="320" stroke="#2E3A50" stroke-width="1" />
+            <line x1="240" y1="0" x2="240" y2="320" stroke="#2E3A50" stroke-width="1" />
+            <line x1="320" y1="0" x2="320" y2="320" stroke="#2E3A50" stroke-width="1" />
+            <path d="M40 160 H120 V80 H200 V160 H280 V240 H360" stroke="#F5C200" stroke-width="2" fill="none"
+              opacity=".8" />
+            <circle cx="120" cy="160" r="6" fill="#F5C200" />
+            <circle cx="200" cy="80" r="6" fill="#F5C200" />
+            <circle cx="280" cy="160" r="6" fill="#F5C200" />
+            <rect x="110" y="210" width="60" height="20" rx="2" stroke="#F5C200" stroke-width="1.5" fill="none" />
+            <line x1="80" y1="220" x2="110" y2="220" stroke="#F5C200" stroke-width="1.5" />
+            <line x1="170" y1="220" x2="200" y2="220" stroke="#F5C200" stroke-width="1.5" />
+            <polygon points="210,120 195,155 205,155 190,190 215,145 200,145" fill="#F5C200" opacity=".9" />
+          </svg>
+        </div>
+        <div class="about-text">
+          <div class="section-eyebrow">Who We Are</div>
+          <h2 class="section-title">Built on Two<br />Decades of<br />Electrical Expertise</h2>
+          <p>VoltEx Electricals has been supplying premium electrical spare parts since 1999. We serve industrial
+            plants, contractors, OEMs, and maintenance teams across the country.</p>
+          <p>Our certified electrical engineers ensure every part meets the highest safety and compatibility standards.
+          </p>
+          <ul class="feature-list">
+            <li>Genuine OEM and approved-equivalent parts only</li>
+            <li>Same-day dispatch on in-stock items before 3 PM</li>
+            <li>Technical support from certified engineers</li>
+            <li>Bulk supply contracts for industrial clients</li>
+            <li>Pan-India delivery with tracked shipping</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="products">
+      <div class="section-eyebrow">What We Supply</div>
+      <h2 class="section-title">Our Product Range</h2>
+      <p class="section-sub">Stocking the components that keep your operations running.</p>
+      <div class="products-grid" id="landing-products-grid"><p style="color:var(--muted);text-align:center;grid-column:1/-1;padding:3rem">Loading products…</p></div>
+      <!-- Per-product catalogue download available on each product card -->
+    </section>
+
+    <section id="contact">
+      <div class="section-eyebrow">Reach Us</div>
+      <h2 class="section-title">Get in Touch</h2>
+      <p class="section-sub">Need a part, bulk quote, or technical advice? We respond within 2 business hours.</p>
+      <div class="contact-grid">
+        <div>
+          <div class="info-row">
+            <div class="info-icon">&#128205;</div>
+            <div>
+              <div class="info-label">Address</div>
+              <div class="info-value">Plot 14, Industrial Estate, MIDC Phase II,<br />Navi Mumbai, Maharashtra &ndash;
+                400 705</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">&#128222;</div>
+            <div>
+              <div class="info-label">Phone</div>
+              <div class="info-value"><a href="tel:+912240001234">+91 22 4000 1234</a></div>
+              <div class="info-value"><a href="tel:+919876543210">+91 98765 43210</a> (WhatsApp)</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">&#9993;</div>
+            <div>
+              <div class="info-label">Email</div>
+              <div class="info-value"><a href="mailto:sales@voltexelectricals.in">sales@voltexelectricals.in</a></div>
+              <div class="info-value"><a href="mailto:support@voltexelectricals.in">support@voltexelectricals.in</a>
+              </div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-icon">&#128336;</div>
+            <div>
+              <div class="info-label">Hours</div>
+              <div class="info-value">Mon &ndash; Sat: 9:00 AM &ndash; 6:30 PM<br />Sunday: Closed</div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <form class="contact-form" onsubmit="handleEnquiry(event)">
+            <div class="form-row">
+              <div class="field"><label>Full Name</label><input type="text" id="eq-name" placeholder="Rajesh Kumar"
+                  required /></div>
+              <div class="field"><label>Company</label><input type="text" id="eq-company"
+                  placeholder="Your Company Ltd." /></div>
+            </div>
+            <div class="form-row">
+              <div class="field"><label>Phone</label><input type="tel" id="eq-phone" placeholder="+91 98000 00000"
+                  required /></div>
+              <div class="field"><label>Email <span class="input-required">*</span></label><input type="email" id="eq-email" placeholder="you@company.com"
+                  required /></div>
+            </div>
+            <div class="field"><label>Enquiry Type <span class="input-required">*</span></label>
+              <select id="eq-type" required>
+                <option value="">Select a category</option>
+                <option value="Product Availability">Product Availability</option>
+                <option value="Bulk / OEM Supply">Bulk / OEM Supply</option>
+                <option value="Technical Support">Technical Support</option>
+                <option value="Custom Order">Custom Order</option>
+                <option value="General Enquiry">General Enquiry</option>
+              </select>
+            </div>
+            <div class="field"><label>Message / Part Number <span class="input-required">*</span></label><textarea id="eq-msg"
+                placeholder="Describe the parts needed or your query..." required></textarea></div>
+            <button type="submit" class="btn-primary" style="width:fit-content" id="enq-submit-btn">Send Enquiry
+              &rarr;</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">Volt<span>Ex</span> Electricals</div>
+          <p>Your trusted partner for industrial and commercial electrical spare parts since 1999. Serving across India.
+          </p>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a onclick="showPage('home')">Home</a></li>
+            <li><a onclick="goSection('about')">About Us</a></li>
+            <li><a onclick="goSection('products')">Products</a></li>
+            <li><a onclick="goSection('contact')">Contact</a></li>
+            <li><a onclick="openDashboard()">Dashboard</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Policies</h4>
+          <ul>
+            <li><a onclick="showPage('privacy')">Privacy Policy</a></li>
+            <li><a onclick="showPage('refund')">Refund Policy</a></li>
+            <li><a onclick="showPage('shipping')">Shipping Terms</a></li>
+            <li><a onclick="showPage('terms')">Terms &amp; Conditions</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="tel:+912240001234">+91 22 4000 1234</a></li>
+            <li><a href="mailto:sales@voltexelectricals.in">sales@voltexelectricals.in</a></li>
+            <li><a>MIDC Phase II, Navi Mumbai</a></li>
+            <li><a>GSTIN: 27AABCV1234A1Z5</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2024 VoltEx Electricals Pvt. Ltd. All rights reserved.</p>
+        <p>
+          <a onclick="showPage('privacy')">Privacy Policy</a>
+          <a onclick="showPage('refund')">Refund Policy</a>
+          <a onclick="showPage('shipping')">Shipping Terms</a>
+          <a onclick="showPage('terms')">Terms &amp; Conditions</a>
+        </p>
+      </div>
+    </footer>
+  </div><!-- /page-home -->
+
+  <!-- ============================================================
+     POLICY PAGES
+============================================================ -->
+  <div id="page-privacy" class="page">
+    <div style="background:var(--black);min-height:100vh">
+      <div class="policy-page">
+        <a class="policy-back" onclick="showPage('home')">&larr; Back to Home</a>
+        <h1>Privacy Policy</h1>
+        <div class="policy-date">Last Updated: 1 January 2024</div>
+        <p>VoltEx Electricals Pvt. Ltd. is committed to protecting your personal information. This Privacy Policy
+          explains how we collect, use, and safeguard your data.</p>
+        <h2>1. Information We Collect</h2>
+        <p>We collect name, company, email, phone number, shipping address, payment details, and usage data such as IP
+          address and pages visited.</p>
+        <h2>2. How We Use Your Information</h2>
+        <ul>
+          <li>To process and fulfil your orders</li>
+          <li>To send order confirmations and shipping updates</li>
+          <li>To respond to enquiries and provide technical support</li>
+          <li>To send promotional communications (with your consent)</li>
+          <li>To improve our website and services</li>
+        </ul>
+        <h2>3. Data Sharing</h2>
+        <p>We do not sell your personal data. We may share data with logistics partners, payment gateways, and
+          government authorities if required by law.</p>
+        <h2>4. Data Security</h2>
+        <p>We implement SSL encryption, secure servers, and restricted access to personal data.</p>
+        <h2>5. Cookies</h2>
+        <p>We use cookies to enhance your browsing experience and analyse traffic. You can disable cookies in your
+          browser settings.</p>
+        <h2>6. Your Rights</h2>
+        <p>Contact <a href="mailto:support@voltexelectricals.in"
+            style="color:var(--yellow)">support@voltexelectricals.in</a> to access, correct, or delete your data.</p>
+        <h2>7. Contact</h2>
+        <p>Plot 14, MIDC Phase II, Navi Mumbai &ndash; 400 705.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="page-refund" class="page">
+    <div style="background:var(--black);min-height:100vh">
+      <div class="policy-page">
+        <a class="policy-back" onclick="showPage('home')">&larr; Back to Home</a>
+        <h1>Refund Policy</h1>
+        <div class="policy-date">Last Updated: 1 January 2024</div>
+        <p>We want you to be completely satisfied with your purchase.</p>
+        <h2>1. Eligibility for Returns</h2>
+        <ul>
+          <li>Items must be returned within <strong style="color:var(--offwhite)">7 days</strong> of delivery</li>
+          <li>Products must be unused, in original packaging with all accessories</li>
+          <li>Proof of purchase required for all returns</li>
+          <li>Damaged items eligible for return within 48 hours of receipt</li>
+        </ul>
+        <h2>2. Non-Returnable Items</h2>
+        <ul>
+          <li>Custom-ordered or specially fabricated parts</li>
+          <li>Electrical items that have been installed or energised</li>
+          <li>Items damaged due to improper use or installation error</li>
+          <li>Items with broken seals or missing serial numbers</li>
+        </ul>
+        <h2>3. Refund Process</h2>
+        <p>Approved refunds processed within <strong style="color:var(--offwhite)">5&ndash;7 business days</strong> to
+          your original payment method.</p>
+        <h2>4. Replacement</h2>
+        <p>For defective items, we offer a direct replacement. If out of stock, a full refund or store credit.</p>
+        <h2>5. Return Shipping</h2>
+        <p>Return shipping borne by customer unless item is defective or incorrectly shipped.</p>
+        <h2>6. How to Initiate a Return</h2>
+        <p>Email <a href="mailto:support@voltexelectricals.in"
+            style="color:var(--yellow)">support@voltexelectricals.in</a> with your order number. We provide a Return
+          Authorisation Number (RAN) within 24 hours.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="page-shipping" class="page">
+    <div style="background:var(--black);min-height:100vh">
+      <div class="policy-page">
+        <a class="policy-back" onclick="showPage('home')">&larr; Back to Home</a>
+        <h1>Shipping Terms</h1>
+        <div class="policy-date">Last Updated: 1 January 2024</div>
+        <p>VoltEx Electricals offers reliable, tracked shipping across India.</p>
+        <h2>1. Processing Time</h2>
+        <ul>
+          <li>In-stock orders before 3:00 PM IST (Mon&ndash;Sat) dispatched same day</li>
+          <li>Orders after 3:00 PM dispatched next business day</li>
+          <li>Custom or bulk orders: 2&ndash;5 business days processing time</li>
+        </ul>
+        <h2>2. Delivery Timeframes</h2>
+        <ul>
+          <li><strong style="color:var(--offwhite)">Mumbai Metro:</strong> 1&ndash;2 business days</li>
+          <li><strong style="color:var(--offwhite)">Maharashtra:</strong> 2&ndash;3 business days</li>
+          <li><strong style="color:var(--offwhite)">Metro Cities:</strong> 2&ndash;4 business days</li>
+          <li><strong style="color:var(--offwhite)">Rest of India:</strong> 4&ndash;7 business days</li>
+          <li><strong style="color:var(--offwhite)">Remote / Hill Areas:</strong> 7&ndash;10 business days</li>
+        </ul>
+        <h2>3. Shipping Charges</h2>
+        <p>Free shipping on orders above &#8377;5,000. Orders below &#8377;5,000 attract a flat fee of &#8377;150.</p>
+        <h2>4. Tracking</h2>
+        <p>A tracking number is emailed once your order is dispatched.</p>
+        <h2>5. Damaged in Transit</h2>
+        <p>Photograph the parcel immediately and email us within 48 hours for a replacement or refund.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="page-terms" class="page">
+    <div style="background:var(--black);min-height:100vh">
+      <div class="policy-page">
+        <a class="policy-back" onclick="showPage('home')">&larr; Back to Home</a>
+        <h1>Terms &amp; Conditions</h1>
+        <div class="policy-date">Last Updated: 1 January 2024</div>
+        <p>By accessing this website or placing an order with VoltEx Electricals Pvt. Ltd., you agree to these Terms and
+          Conditions.</p>
+        <h2>1. General</h2>
+        <p>These terms govern your use of our website and the purchase of products. We reserve the right to update these
+          terms at any time.</p>
+        <h2>2. Product Information</h2>
+        <p>We make every effort to ensure product descriptions are accurate. Specifications are subject to change
+          without notice.</p>
+        <h2>3. Pricing &amp; Payment</h2>
+        <ul>
+          <li>All prices in Indian Rupees (INR) inclusive of GST unless stated otherwise</li>
+          <li>Prices subject to change without prior notice</li>
+          <li>Payment must be made in full before dispatch unless a credit account is established</li>
+          <li>Accepted: NEFT/RTGS, UPI, credit/debit card, cheque (subject to clearance)</li>
+        </ul>
+        <h2>4. Intellectual Property</h2>
+        <p>All content on this website is the property of VoltEx Electricals Pvt. Ltd. and may not be reproduced without
+          written permission.</p>
+        <h2>5. Limitation of Liability</h2>
+        <p>Our liability is limited to the invoice value of the product in question.</p>
+        <h2>6. Governing Law</h2>
+        <p>These terms are governed by the laws of India. Disputes are subject to the exclusive jurisdiction of courts
+          in Mumbai, Maharashtra.</p>
+        <h2>7. Contact</h2>
+        <p>legal@voltexelectricals.in &nbsp;|&nbsp; +91 22 4000 1234</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+     DASHBOARD PAGE
+============================================================ -->
+  <div id="page-dashboard" class="page">
+    <div class="dash-wrap">
+      <div class="dash-sidebar">
+        <h3>Main</h3>
+        <div class="dash-nav-item active" onclick="showDashTab('overview')" id="dtab-btn-overview"><span
+            class="icon">&#128202;</span> Overview</div>
+        <h3>Catalogue</h3>
+        <div class="dash-nav-item" onclick="showDashTab('products')" id="dtab-btn-products"><span
+            class="icon">&#128230;</span> Products</div>
+        <h3>Customer</h3>
+        <div class="dash-nav-item" onclick="showDashTab('enquiries')" id="dtab-btn-enquiries"><span
+            class="icon">&#128233;</span> Enquiries</div>
+        <div class="dash-logout">
+          <button onclick="doLogout()">&#128274; Logout</button>
+        </div>
+      </div>
+
+      <div class="dash-main">
+
+        <!-- OVERVIEW TAB -->
+        <div class="dash-tab active" id="dtab-overview">
+          <div class="dash-header">
+            <div class="dash-header-text">
+              <h1>Dashboard Overview</h1>
+              <p>VoltEx operations snapshot.</p>
+            </div>
+            <div class="dash-user-badge">Logged in as &nbsp;<span id="dash-user-email"></span></div>
+          </div>
+          <div class="stat-cards">
+            <div class="stat-card yellow">
+              <div class="sc-label">Total Products</div>
+              <div class="sc-value" id="ov-total">—</div>
+              <div class="sc-sub">In catalogue</div>
+            </div>
+            <div class="stat-card green">
+              <div class="sc-label">Active Products</div>
+              <div class="sc-value" id="ov-active">—</div>
+              <div class="sc-sub">Published &amp; visible</div>
+            </div>
+            <div class="stat-card blue">
+              <div class="sc-label">Total Enquiries</div>
+              <div class="sc-value" id="ov-enq">—</div>
+              <div class="sc-sub">All time</div>
+            </div>
+            <div class="stat-card red">
+              <div class="sc-label">New Enquiries</div>
+              <div class="sc-value" id="ov-new-enq">—</div>
+              <div class="sc-sub">Awaiting response</div>
+            </div>
+          </div>
+          <div class="dash-section">
+            <div class="dash-section-head">
+              <h2>Recent Enquiries</h2>
+              <button class="btn-sm btn-info" onclick="showDashTab('enquiries')">View All</button>
+            </div>
+            <div class="tbl-wrap">
+              <table class="dash-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Company</th>
+                    <th>Type</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-enq-body">
+                  <tr>
+                    <td colspan="6" style="color:var(--muted);text-align:center;padding:2rem">Loading...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- PRODUCTS TAB -->
+        <div class="dash-tab" id="dtab-products">
+          <div class="dash-header">
+            <div class="dash-header-text">
+              <h1>Products</h1>
+              <p>Add, edit, or remove catalogue items.</p>
+            </div>
+          </div>
+          <div style="margin-bottom:1.5rem">
+            <button class="btn-primary" onclick="openAddProduct()">+ Add New Product</button>
+          </div>
+          <div class="dash-section">
+            <div class="dash-section-head">
+              <h2>All Products</h2>
+              <span id="prod-count-lbl" style="color:var(--muted);font-size:.85rem"></span>
+            </div>
+            <div class="tbl-wrap">
+              <table class="dash-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Image</th>
+                    <th>Name / SKU</th>
+                    <th>Description</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="products-tbody">
+                  <tr>
+                    <td colspan="6" style="color:var(--muted);text-align:center;padding:2rem">Loading...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ENQUIRIES TAB -->
+        <div class="dash-tab" id="dtab-enquiries">
+          <div class="dash-header">
+            <div class="dash-header-text">
+              <h1>Customer Enquiries</h1>
+              <p>All enquiries submitted through the website contact form.</p>
+            </div>
+          </div>
+
+          <!-- Filters -->
+          <div class="dash-section" style="padding:1rem 1.25rem">
+            <div style="display:flex;gap:1rem;align-items:flex-end;flex-wrap:wrap">
+              <div class="field" style="margin:0;min-width:160px">
+                <label style="font-size:.78rem;color:var(--muted);display:block;margin-bottom:.3rem">Status</label>
+                <select id="filter-status"
+                  style="background:var(--mid);border:1px solid #3a4455;border-radius:4px;padding:.45rem .7rem;color:var(--offwhite);font-size:.85rem;width:100%">
+                  <option value="">All Statuses</option>
+                  <option value="new">New</option>
+                  <option value="in_progress">In Progress</option>
+                  <option value="resolved">Resolved</option>
+                  <option value="ignored">Ignored</option>
+                </select>
+              </div>
+              <div class="field" style="margin:0;min-width:200px">
+                <label style="font-size:.78rem;color:var(--muted);display:block;margin-bottom:.3rem">Enquiry Type</label>
+                <select id="filter-type"
+                  style="background:var(--mid);border:1px solid #3a4455;border-radius:4px;padding:.45rem .7rem;color:var(--offwhite);font-size:.85rem;width:100%">
+                  <option value="">All Types</option>
+                  <option value="Product Availability">Product Availability</option>
+                  <option value="Bulk / OEM Supply">Bulk / OEM Supply</option>
+                  <option value="Technical Support">Technical Support</option>
+                  <option value="Custom Order">Custom Order</option>
+                  <option value="General Enquiry">General Enquiry</option>
+                </select>
+              </div>
+              <button class="btn-sm btn-info" onclick="loadAdminEnquiries()"
+                style="padding:.5rem 1.1rem;height:fit-content">Apply Filters</button>
+            </div>
+          </div>
+
+          <div class="dash-section">
+            <div class="dash-section-head">
+              <h2>Enquiry List</h2>
+              <span id="enq-count-lbl" style="color:var(--muted);font-size:.85rem"></span>
+            </div>
+            <div class="tbl-wrap">
+              <table class="dash-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Company</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Type</th>
+                    <th>Message</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Del</th>
+                  </tr>
+                </thead>
+                <tbody id="enquiries-tbody">
+                  <tr>
+                    <td colspan="10" style="color:var(--muted);text-align:center;padding:2rem">Loading...</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /dash-main -->
+    </div><!-- /dash-wrap -->
+  </div><!-- /page-dashboard -->
+
+  <!-- ============================================================
+     PDF LEAD MODAL (View More Catalogue)
+============================================================ -->
+  <div class="modal-overlay" id="pdf-modal" onclick="if(event.target===this)closePdfModal()">
+    <div class="modal">
+      <div class="pdf-modal-header">
+        <div class="pdf-icon">&#128196;</div>
+        <div>
+          <h3>Download Product Catalogue</h3>
+          <p>Complete list of 10,000+ electrical spare parts with specs &amp; pricing</p>
+        </div>
+      </div>
+      <p style="font-size:.85rem;color:var(--muted);margin-bottom:1.2rem">Please fill in your details below to receive
+        your copy of the VoltEx Electricals Product Catalogue (PDF).</p>
+      <div class="two-col">
+        <div class="field"><label>Full Name <span class="input-required">*</span></label><input type="text"
+            id="pdf-name" placeholder="Rajesh Kumar" /></div>
+        <div class="field"><label>Company Name</label><input type="text" id="pdf-company"
+            placeholder="Your Company Ltd." /></div>
+      </div>
+      <div class="two-col">
+        <div class="field"><label>Phone Number <span class="input-required">*</span></label><input type="tel"
+            id="pdf-phone" placeholder="+91 98000 00000" /></div>
+        <div class="field"><label>Email Address <span class="input-required">*</span></label><input type="email"
+            id="pdf-email" placeholder="you@company.com" /></div>
+      </div>
+      <div class="two-col">
+        <div class="field"><label>City / Location</label><input type="text" id="pdf-city" placeholder="Mumbai" /></div>
+        <div class="field"><label>Area of Interest</label>
+          <select id="pdf-interest">
+            <option value="">Select product type</option>
+            <option>Circuit Breakers</option>
+            <option>Switchgear</option>
+            <option>Motors &amp; Drives</option>
+            <option>Transformers</option>
+            <option>Control Panels</option>
+            <option>Lighting &amp; Fixtures</option>
+            <option>Sensors &amp; Relays</option>
+            <option>Cables &amp; Wiring</option>
+            <option>All Products</option>
+          </select>
+        </div>
+      </div>
+      <div id="pdf-error"
+        style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);border-radius:var(--radius);padding:.6rem 1rem;font-size:.82rem;color:var(--red);display:none;margin-top:.5rem">
+        Please fill in all required fields (Name, Phone, Email).</div>
+      <div class="modal-actions">
+        <button class="btn-primary" onclick="submitPdfLead()">&#128229; Download PDF Catalogue</button>
+        <button class="btn-ghost" onclick="closePdfModal()" style="margin-left:0">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCT ADD/EDIT MODAL -->
+  <div class="modal-overlay" id="modal-overlay" onclick="if(event.target===this)closeModal()">
+    <div class="modal" style="max-width:640px;max-height:90vh;overflow-y:auto">
+      <h2 id="modal-title">Add New Product</h2>
+      <form id="product-form" onsubmit="return false">
+
+        <!-- Name + SKU -->
+        <div class="two-col" style="margin-top:1rem">
+          <div class="field">
+            <label>Product Name <span class="input-required">*</span></label>
+            <input type="text" id="p-name" placeholder="e.g. Circuit Breakers" />
+          </div>
+          <div class="field">
+            <label>SKU / Part Number</label>
+            <input type="text" id="p-sku" placeholder="VTX-001" />
+          </div>
+        </div>
+
+        <!-- Short Description -->
+        <div class="field mg">
+          <label>Short Description</label>
+          <textarea id="p-short-desc" style="min-height:60px"
+            placeholder="One-line summary shown on product cards..."></textarea>
+        </div>
+
+        <!-- Detailed Description -->
+        <div class="field mg">
+          <label>Detailed Description</label>
+          <textarea id="p-detailed-desc" style="min-height:80px"
+            placeholder="Full product details, specs narrative, use cases..."></textarea>
+        </div>
+
+        <!-- Status -->
+        <div class="field mg">
+          <label>Status</label>
+          <select id="p-status"
+            style="background:var(--mid);border:1px solid #3a4455;border-radius:4px;padding:.5rem .7rem;color:var(--offwhite);font-size:.9rem;width:100%">
+            <option value="draft">Draft</option>
+            <option value="active">Active (visible on website)</option>
+            <option value="out_of_stock">Out of Stock</option>
+            <option value="archived">Archived</option>
+          </select>
+        </div>
+
+        <!-- Files -->
+        <div class="two-col">
+          <div class="field">
+            <label>Product Image (jpg / png)</label>
+            <input type="file" id="p-image-file" accept=".jpg,.jpeg,.png,.webp" />
+          </div>
+          <div class="field">
+            <label>Catalogue PDF</label>
+            <input type="file" id="p-catalogue-file" accept=".pdf" />
+          </div>
+        </div>
+
+        <!-- Specifications -->
+        <div class="field mg">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.5rem">
+            <label style="margin:0">Specifications</label>
+            <button type="button" onclick="addSpec()"
+              style="font-size:.78rem;background:rgba(245,194,0,.12);color:var(--yellow);border:1px solid rgba(245,194,0,.3);border-radius:4px;padding:.25rem .7rem;cursor:pointer">+ Add Row</button>
+          </div>
+          <div id="specs-container"
+            style="display:flex;flex-direction:column;gap:.4rem;max-height:180px;overflow-y:auto;padding-right:2px"></div>
+          <p style="font-size:.73rem;color:var(--muted);margin-top:.4rem">Key / Value pairs shown in the product spec table (e.g. Voltage → 230V AC).</p>
+        </div>
+
+      </form>
+      <div class="modal-actions">
+        <button class="btn-primary" onclick="saveProduct()" id="save-product-btn">Save Product</button>
+        <button class="btn-ghost" onclick="closeModal()" style="margin-left:0">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="services/api.js"></script>
+  <script src="services/productService.js"></script>
+  <script src="services/enquiryService.js"></script>
+  <script src="voltex.js"></script>
+
+</body>
+
+</html>
