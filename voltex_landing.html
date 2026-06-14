@@ -717,6 +717,11 @@
     </div>
   </div>
 
+  <!-- PRODUCT DETAIL MODAL (public view) -->
+  <div class="modal-overlay" id="detail-modal-overlay" onclick="if(event.target===this)closeDetailModal()">
+    <div class="modal" id="detail-modal" style="position:relative;max-width:700px;max-height:90vh;overflow-y:auto"></div>
+  </div>
+
   <script src="config.js"></script>
   <script src="services/api.js"></script>
   <script src="services/productService.js"></script>

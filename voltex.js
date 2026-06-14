@@ -4,6 +4,7 @@ let authUser = null
 let products = []
 let enquiries = []
 let editingProductId = null
+const productDetailCache = {}
 
 // Auto-restore session from token stored in localStorage
 ;(function restoreSession() {
@@ -103,10 +104,6 @@ function renderLandingGrid() {
 
   grid.innerHTML = products.map(p => {
     const imgUrl = p.main_image?.blob_url
-    const catId = p.catalogue?.id
-    const catStreamUrl = catId
-      ? `${CONFIG.BASE_URL}/api/${CONFIG.API_VERSION}/media/${catId}/stream?tenant=${CONFIG.TENANT_ID}`
-      : null
     return `
       <div class="product-card">
         ${imgUrl
@@ -118,7 +115,7 @@ function renderLandingGrid() {
           <div class="card-title">${escHtml(p.name)}</div>
           ${p.sku ? `<div style="font-size:.72rem;color:var(--muted);margin-bottom:4px">SKU: ${escHtml(p.sku)}</div>` : ''}
           <div class="card-desc">${escHtml(p.short_description || '')}</div>
-          ${catStreamUrl ? `<div style="margin-top:8px"><a class="btn-sm btn-ghost" href="${catStreamUrl}" target="_blank">View Catalogue</a></div>` : ''}
+          <div style="margin-top:8px"><button class="btn-sm btn-ghost" onclick="openProductDetail(${p.id})">View Details &rarr;</button></div>
         </div>
       </div>`
   }).join('')
@@ -476,6 +473,78 @@ function generatePDF(lead) {
   </body></html>`)
   w.document.close()
   setTimeout(() => w.print(), 400)
+}
+
+// ── PRODUCT DETAIL MODAL (public) ────────────────────────────────────────────
+async function openProductDetail(id) {
+  document.getElementById('detail-modal-overlay').classList.add('open')
+  document.getElementById('detail-modal').innerHTML =
+    '<p style="color:var(--muted);text-align:center;padding:3rem">Loading…</p>'
+  try {
+    if (!productDetailCache[id]) {
+      productDetailCache[id] = await productService.getById(id)
+    }
+    renderDetailModal(productDetailCache[id])
+  } catch (e) {
+    document.getElementById('detail-modal').innerHTML =
+      '<p style="color:#ef4444;text-align:center;padding:3rem">Failed to load product details.</p>'
+  }
+}
+
+function closeDetailModal() {
+  document.getElementById('detail-modal-overlay').classList.remove('open')
+}
+
+function renderDetailModal(p) {
+  const imgUrl = p.main_image?.blob_url
+  const catId = p.catalogue?.id
+  const catStreamUrl = catId
+    ? `${CONFIG.BASE_URL}/api/${CONFIG.API_VERSION}/media/${catId}/stream?tenant=${CONFIG.TENANT_ID}`
+    : null
+
+  const activeSpecs = (p.specifications || []).filter(s => !s.is_deleted)
+  const specsHtml = activeSpecs.length
+    ? `<div style="margin-top:1.2rem">
+        <div style="font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.4rem">Specifications</div>
+        <table style="width:100%;border-collapse:collapse">
+          ${activeSpecs.map(s => `
+            <tr>
+              <td style="padding:.38rem .55rem;background:var(--mid);border-bottom:1px solid #2a3346;font-size:.8rem;color:var(--muted);width:42%">${escHtml(s.spec_key)}</td>
+              <td style="padding:.38rem .55rem;border-bottom:1px solid #2a3346;font-size:.8rem;color:var(--offwhite)">${escHtml(s.spec_value)}</td>
+            </tr>`).join('')}
+        </table>
+      </div>`
+    : ''
+
+  document.getElementById('detail-modal').innerHTML = `
+    <button onclick="closeDetailModal()" aria-label="Close"
+      style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--muted);font-size:1.5rem;cursor:pointer;line-height:1">&times;</button>
+    ${imgUrl
+      ? `<img src="${escHtml(imgUrl)}" alt="${escHtml(p.name)}"
+           style="width:100%;max-height:300px;object-fit:cover;border-radius:8px;margin-bottom:1.2rem"
+           onerror="this.style.display='none'"/>`
+      : ''}
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.8rem">
+      <div>
+        <h2 style="color:var(--white);margin:0 0 .25rem;font-size:1.35rem">${escHtml(p.name)}</h2>
+        ${p.sku ? `<div style="font-size:.75rem;color:var(--muted)">SKU: ${escHtml(p.sku)}</div>` : ''}
+      </div>
+      ${catStreamUrl
+        ? `<a href="${catStreamUrl}" target="_blank"
+             style="background:var(--yellow);color:#000;font-weight:700;font-size:.8rem;padding:.4rem .9rem;border-radius:4px;text-decoration:none;white-space:nowrap;flex-shrink:0">
+             Download Catalogue</a>`
+        : ''}
+    </div>
+    ${p.short_description ? `<p style="color:var(--offwhite);margin-bottom:.6rem;line-height:1.55">${escHtml(p.short_description)}</p>` : ''}
+    ${p.detailed_description ? `<p style="color:var(--muted);font-size:.87rem;line-height:1.65">${escHtml(p.detailed_description)}</p>` : ''}
+    ${specsHtml}
+    <div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid #2a3346">
+      <button onclick="closeDetailModal();goSection('enquiry')"
+        style="background:var(--yellow);color:#000;font-weight:700;font-size:.85rem;padding:.55rem 1.2rem;border:none;border-radius:5px;cursor:pointer">
+        Get a Quote &rarr;
+      </button>
+    </div>
+  `
 }
 
 // ── HELPERS ───────────────────────────────────────────────────────────────────
